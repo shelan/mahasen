@@ -1,0 +1,13 @@
+<serviceGroup>
+    <service name="MahasenService" scope="transportsession">
+
+        <parameter name="ServiceClass" locked="false">
+            org.mahasen.webservice.MahasenServiceClass
+        </parameter>
+    </service>
+
+    <parameter name="adminService" locked="true">true</parameter>
+    <parameter name="hiddenService" locked="true">true</parameter>
+    <parameter name="AuthorizationAction" locked="true">/permission/admin/manage/resources/browse</parameter>
+
+</serviceGroup>

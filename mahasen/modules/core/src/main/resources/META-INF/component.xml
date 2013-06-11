@@ -1,0 +1,71 @@
+<component xmlns="http://products.wso2.org/carbon">
+    <servlets>
+		<servlet id="mahasendownload">
+			<servlet-name>mahasendownload</servlet-name>
+		    <url-pattern>/mahasen/download_ajaxprocessor.jsp</url-pattern>
+			<display-name>Mahasen Download</display-name>
+			<servlet-class>org.mahasen.servlet.DownloadServlet</servlet-class>
+		</servlet>
+        <servlet id="mahasenupload">
+			<servlet-name>mahasenupload</servlet-name>
+		    <url-pattern>/mahasen/upload_ajaxprocessor.jsp</url-pattern>
+			<display-name>Mahasen Upload</display-name>
+			<servlet-class>org.mahasen.servlet.UploadServlet</servlet-class>
+		</servlet>
+        <servlet id="mahasendelete">
+			<servlet-name>mahasendelete</servlet-name>
+		    <url-pattern>/mahasen/delete_ajaxprocessor.jsp</url-pattern>
+			<display-name>Mahasen Delete</display-name>
+			<servlet-class>org.mahasen.servlet.DeleteServlet</servlet-class>
+		</servlet>
+        <servlet id="mahasenupdate">
+			<servlet-name>mahasenupdate</servlet-name>
+		    <url-pattern>/mahasen/update_ajaxprocessor.jsp</url-pattern>
+			<display-name>Mahasen Update</display-name>
+			<servlet-class>org.mahasen.servlet.UpdateServlet</servlet-class>
+		</servlet>
+        <servlet id="mahasensearch">
+			<servlet-name>mahasensearch</servlet-name>
+		    <url-pattern>/mahasen/search_ajaxprocessor.jsp</url-pattern>
+			<display-name>Mahasen Search</display-name>
+			<servlet-class>org.mahasen.servlet.SearchServlet</servlet-class>
+		</servlet>
+        <servlet id="mahasendeleterequest">
+			<servlet-name>mahasendeleterequest</servlet-name>
+		    <url-pattern>/mahasen/delete_request_ajaxprocessor.jsp</url-pattern>
+			<display-name>Mahasen Delete Request</display-name>
+			<servlet-class>org.mahasen.servlet.DeleteRequestServlet</servlet-class>
+		</servlet>
+        <servlet id="mahasendownloadrequest">
+			<servlet-name>mahasendownloadrequest</servlet-name>
+		    <url-pattern>/mahasen/download_request_ajaxprocessor.jsp</url-pattern>
+			<display-name>Mahasen Download Request</display-name>
+			<servlet-class>org.mahasen.servlet.DownloadRequestServlet</servlet-class>
+		</servlet>
+        <servlet id="mahasenreplicaterequest">
+			<servlet-name>mahasenreplicaterequest</servlet-name>
+		    <url-pattern>/mahasen/replicate_request_ajaxprocessor.jsp</url-pattern>
+			<display-name>Mahasen Replicate Request</display-name>
+			<servlet-class>org.mahasen.servlet.ReplicateRequestServlet</servlet-class>
+		</servlet>
+        <servlet id="mahasenuploadrequest">
+			<servlet-name>mahasenuploadrequest</servlet-name>
+		    <url-pattern>/mahasen/upload_request_ajaxprocessor.jsp</url-pattern>
+			<display-name>Mahasen Upload Request</display-name>
+			<servlet-class>org.mahasen.servlet.UploadRequestServlet</servlet-class>
+		</servlet>
+        <servlet id="mahasenmultipleandsearchrequest">
+			<servlet-name>mahasenmultipleandsearch</servlet-name>
+		    <url-pattern>/mahasen/multiple_and_search_request_ajaxprocessor.jsp</url-pattern>
+			<display-name>Mahasen Multiple And Search Request</display-name>
+			<servlet-class>org.mahasen.servlet.MultipleAndSearchServlet</servlet-class>
+		</servlet>
+        <servlet id="mahasenmultipleorsearchrequest">
+			<servlet-name>mahasenmultipleorsearch</servlet-name>
+		    <url-pattern>/mahasen/multiple_or_search_request_ajaxprocessor.jsp</url-pattern>
+			<display-name>Mahasen Multiple Or Search Request</display-name>
+			<servlet-class>org.mahasen.servlet.MultipleOrSearchServlet</servlet-class>
+		</servlet>
+	</servlets>
+
+</component>
