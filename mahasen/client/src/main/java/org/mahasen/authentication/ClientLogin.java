@@ -28,6 +28,7 @@ import org.apache.axis2.transport.http.HTTPConstants;
 import org.mahasen.client.AuthenticationAdminStub;
 import org.mahasen.client.AuthenticationExceptionException;
 
+import java.net.URL;
 import java.rmi.RemoteException;
 
 
@@ -56,9 +57,14 @@ public class ClientLogin {
         ServiceClient client = authAdminStub._getServiceClient();
         Options options = client.getOptions();
         options.setManageSession(true);
-        boolean isLogged = authAdminStub.login(data.getUserName(),
+        boolean isLogged = false ;
+                 try{
+       isLogged = authAdminStub.login(data.getUserName(),
                 data.getPassWord(),
-                data.getHostNameAndPort());
+                new URL(serviceEPR).getHost());
+                 }catch (Exception e){
+
+                 }
 
         data.setIsLoggedIn(isLogged);
         String cookie = (String) authAdminStub
