@@ -11,8 +11,6 @@ public class Test {
 
     public static void main(String[] args) throws Exception{
 
-
-
         String testToRun = "";
 
         if("upload".equalsIgnoreCase(testToRun)){

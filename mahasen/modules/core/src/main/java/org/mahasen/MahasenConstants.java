@@ -42,7 +42,7 @@ public class MahasenConstants {
     public final static String INTEGER_PROPERTY_TREE = "integer";
 
     //number of replicas for each file. ( so the file will have replica copies and the originaly uploaded file)
-    public final static int NUMBER_OF_REPLICAS = 2;
+    public final static int NUMBER_OF_REPLICAS = 1;
 
 
 }

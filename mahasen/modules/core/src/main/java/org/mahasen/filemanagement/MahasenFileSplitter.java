@@ -22,14 +22,13 @@ import org.mahasen.MahasenConstants;
 
 import java.io.*;
 import java.util.HashMap;
-import java.util.Vector;
 
 public class MahasenFileSplitter {
     private File originalFile;
     private String directory;
     private long fileLength;
     private int noOfParts;
-    private long partSize = 20 * 1024 * 1024;
+    private long partSize = 512 * 1024 * 1024;
     private boolean success = false;
     private File[] fileParts;
     private HashMap<String, String> partNames;
