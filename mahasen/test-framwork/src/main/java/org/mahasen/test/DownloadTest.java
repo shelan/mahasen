@@ -1,4 +1,6 @@
-import org.mahasen.client.Delete;
+package org.mahasen.test;
+
+import org.mahasen.client.Download;
 import org.mahasen.exception.MahasenClientException;
 
 import java.io.File;
@@ -9,39 +11,41 @@ import java.net.URISyntaxException;
  * Created by IntelliJ IDEA.
  * User: shelan
  * Date: 8/16/11
- * Time: 11:27 AM
+ * Time: 11:16 AM
  * To change this template use File | Settings | File Templates.
  */
-public class DeleteTest extends TestRun{
+public class DownloadTest extends TestRun{
 
-  private Delete delete;
+    private Download download;
     private long totalTime;
 
-    public DeleteTest(){
+    public DownloadTest(){
            super.initialize();
-     delete = new Delete(super.clientLoginData);
+     download = new Download(super.clientLoginData);
     }
 
-    public void deleteTest(String sourceFolder) throws IOException, MahasenClientException, URISyntaxException {
+    public void DownloadTest(String sourceFolder) throws IOException, MahasenClientException, URISyntaxException {
 
         File folder = new File(sourceFolder);
                File[] files = folder.listFiles();
+
         for (int i = 0; i < files.length; i++) {
-                final long startTime = System.currentTimeMillis();
-            delete.delete(files[i].getName());
-            final long finishTime = System.currentTimeMillis();long timeConsumed = finishTime-startTime;
+                final long startTime = System.nanoTime();
+            download.download(files[i].getName());
+              final long finishTime = System.nanoTime();
+             long timeConsumed = finishTime-startTime;
             totalTime = totalTime +timeConsumed ;
 
-            System.out.println("Time to Delete job no :"+i+" in milliseconds : "+timeConsumed);
-            System.out.println("totoal time upto now :" +totalTime);
+            System.out.println("Time to Download job no :"+i+" in seconds : "+timeConsumed/1000000000.0);
+            System.out.println("totoal time upto now :" +totalTime/1000000000.0);
         }
-        System.out.println("\nAverage time taken in milliseconds:" + totalTime/files.length);
+        System.out.println("\nAverage time taken :" + (totalTime/(files.length*1000000000.0)));
     }
 
     public static void main(String[] args) {
-        DeleteTest test = new DeleteTest();
+        DownloadTest test = new DownloadTest();
         try {
-            test.deleteTest(TestConfig.UPLOAD_FOLDER);
+            test.DownloadTest(TestConfig.UPLOAD_FOLDER);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (MahasenClientException e) {
@@ -50,4 +54,5 @@ public class DeleteTest extends TestRun{
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
     }
+
 }

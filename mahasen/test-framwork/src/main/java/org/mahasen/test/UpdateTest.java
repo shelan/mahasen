@@ -1,11 +1,11 @@
+package org.mahasen.test;
+
 import org.mahasen.client.AuthenticationExceptionException;
 import org.mahasen.client.UpdateMetadata;
 import org.mahasen.exception.MahasenClientException;
 
 import java.io.File;
 import java.io.IOException;
-
-
 import java.net.URISyntaxException;
 
 /**

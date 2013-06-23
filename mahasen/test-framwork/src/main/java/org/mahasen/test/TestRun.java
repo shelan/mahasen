@@ -1,3 +1,4 @@
+package org.mahasen.test;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -5,8 +6,14 @@ import org.mahasen.authentication.ClientLogin;
 import org.mahasen.authentication.ClientLoginData;
 import org.mahasen.configuration.ClientConfiguration;
 
-import java.io.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Random;
 
 /**
  * Created by IntelliJ IDEA.

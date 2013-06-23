@@ -85,6 +85,7 @@
         <module>modules/core</module>
          <module>client</module>
         <module>MovieApp</module>
+        <module>test-framwork</module>
     </modules>
     <build>
         <plugins>

@@ -1,3 +1,5 @@
+package org.mahasen.test;
+
 import org.mahasen.client.Upload;
 import org.mahasen.exception.MahasenClientException;
 
@@ -12,7 +14,7 @@ import java.net.URISyntaxException;
  * Time: 4:49 PM
  * To change this template use File | Settings | File Templates.
  */
-public class UploadTest extends TestRun{
+public class UploadTest extends TestRun {
 
     Upload upload ;
 

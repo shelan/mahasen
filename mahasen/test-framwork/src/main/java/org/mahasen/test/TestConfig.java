@@ -1,3 +1,5 @@
+package org.mahasen.test;
+
 /**
  * Created by IntelliJ IDEA.
  * User: shelan
@@ -32,11 +34,11 @@ public class TestConfig {
 
 
 
-   public static final String HOST = "10.100.0.237";
+   public static final String HOST = "127.0.0.1";
    public static final String PORT = "9443";
    public static final String USER_NAME = "admin";
    public static final String PASSWORD = "admin";
-   public static final String UPLOAD_FOLDER = "/home/shelan/tmp/client-upload/files-10mb";
+   public static final String UPLOAD_FOLDER = "/home/shelan/tmp/client-upload/files";
    public static final String TAGS_FILE="//home/shelan/tmp/client-upload/tags";
    public final static String FILE_SIZE = "fileSize(MB)";
    public final static String UPLOADED_DATE = "uploadedDate";

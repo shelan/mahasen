@@ -1,3 +1,5 @@
+package org.mahasen.test;
+
 import org.mahasen.client.AuthenticationExceptionException;
 import org.mahasen.client.Search;
 import org.mahasen.exception.MahasenClientException;
@@ -27,7 +29,7 @@ public class SearchTest extends TestRun {
 
    /* public static void main(String args[]){
 
-        SearchTest test = new SearchTest();
+        SearchTest org.mahasen = new SearchTest();
         SearchBean bean1 = new SearchBean("fileName","22.pdf", null, false);
         SearchBean bean2 = new SearchBean("fileSize","5", "30", true);
         ArrayList<SearchBean> list = new ArrayList<SearchBean>();
@@ -40,12 +42,12 @@ public class SearchTest extends TestRun {
 
        try {
 
-           //test.searchTagTest();
-           //test.searchPropertyTest(TestConfig.UPLOAD_FOLDER);
+           //org.mahasen.searchTagTest();
+           //org.mahasen.searchPropertyTest(TestConfig.UPLOAD_FOLDER);
 
            test.rangeSearch(TestConfig.UPLOAD_FOLDER);
 
-           //test.searchTagTest("McKeesport");
+           //org.mahasen.searchTagTest("McKeesport");
 
        } catch (Exception e) {
 
@@ -62,7 +64,7 @@ public class SearchTest extends TestRun {
             try {
 
 
-                for(int i=0; i<10;i++) {
+                for(int i=0; i<1;i++) {
 
                     String separatedTag = new TestRun().createTags(1);
                 final long startTime = System.currentTimeMillis();
@@ -145,8 +147,8 @@ public class SearchTest extends TestRun {
             final long finishTime;
             if(i%2 ==0 ) {
                 try {
-                    int randomNum1 = random.nextInt(10);
-                    int randomNum2 = random.nextInt(10);
+                    int randomNum1 = random.nextInt(1);
+                    int randomNum2 = random.nextInt(1);
 
                     String initialValue =  files[randomNum1].getName();
                     String finalValue = files[randomNum2].getName();
@@ -172,7 +174,7 @@ public class SearchTest extends TestRun {
                         long timeConsumed = finishTime - startTime;
                         totalTime = totalTime + timeConsumed;
 
-                        System.out.println("Time to upload job no :" + i + " " + timeConsumed);
+                        System.out.println("Time to search job no :" + i + " " + timeConsumed);
                     }
 
 
@@ -182,8 +184,8 @@ public class SearchTest extends TestRun {
 
             } else {
                 try {
-                String initialValue = String.valueOf(random.nextInt(10));
-                String lastValue = String.valueOf(random.nextInt(10));
+                String initialValue = String.valueOf(random.nextInt(1));
+                String lastValue = String.valueOf(random.nextInt(1));
                 if(initialValue.compareTo(lastValue)  <= 0) {
                     System.out.println("&&&&&&&&&&&& logic correct&&&&&&&&&"+ initialValue +" "+lastValue);
                         startTime = System.currentTimeMillis();
@@ -194,7 +196,7 @@ public class SearchTest extends TestRun {
                         long timeConsumed = finishTime - startTime;
                         totalTime = totalTime + timeConsumed;
 
-                        System.out.println("Time to upload job no :" + i + " " + timeConsumed);
+                        System.out.println("Time to search job no :" + i + " " + timeConsumed);
 
                 }   else {
                     startTime = System.currentTimeMillis();

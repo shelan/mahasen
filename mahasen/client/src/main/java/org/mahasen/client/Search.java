@@ -375,9 +375,9 @@ public class Search {
 
             }
 
-            /*qparams.add(new BasicNameValuePair("test","value1"));
-           qparams.add(new BasicNameValuePair("test","value2"));
-           qparams.add(new BasicNameValuePair("test","value3"));*/
+            /*qparams.add(new BasicNameValuePair("org.mahasen","value1"));
+           qparams.add(new BasicNameValuePair("org.mahasen","value2"));
+           qparams.add(new BasicNameValuePair("org.mahasen","value3"));*/
             URI uri;
             if (isAndSearch == true) {
                 uri = URIUtils.createURI("https", hostAndPort, -1,
