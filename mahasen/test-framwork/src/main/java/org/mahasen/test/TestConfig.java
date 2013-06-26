@@ -43,6 +43,7 @@ public class TestConfig {
    public final static String FILE_SIZE = "fileSize(MB)";
    public final static String UPLOADED_DATE = "uploadedDate";
    public final static String FILE_NAME = "fileName";
+   public final static String SEC_FILE_PATH = "/home/shelan/mahasen/test/wso2greg-4.5.3/repository/resources/security/client-truststore.jks";
 
 }
 

@@ -1,5 +1,11 @@
 package org.mahasen.test;
 
+import org.mahasen.exception.MahasenClientException;
+
+import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
+
 /**
  * .
  * User: shelan
@@ -7,31 +13,113 @@ package org.mahasen.test;
  * Time: 5:18 PM
  * To change this template use File | Settings | File Templates.
  */
-public class Test {
+public class Test{
 
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args) throws Exception {
 
-        String testToRun = "";
+        String concurrencyLevel = System.getProperty("n", String.valueOf(0));
+        String testToRun = System.getProperty("operation", "delete");
 
-        if("upload".equalsIgnoreCase(testToRun)){
+        System.out.println("printing properties "+concurrencyLevel + "and" + testToRun);
+
+        if ("upload".equalsIgnoreCase(testToRun)) {
             UploadTest test = new UploadTest();
-            test.uploadTest(TestConfig.UPLOAD_FOLDER ,"/shelan");
-        }
-        if("delete".equalsIgnoreCase(testToRun)){
-            DeleteTest test = new DeleteTest();
-            test.deleteTest(TestConfig.UPLOAD_FOLDER);
-        }
-        if("download".equalsIgnoreCase(testToRun)){
-            DownloadTest test = new DownloadTest();
-            test.DownloadTest(TestConfig.UPLOAD_FOLDER);
-        }
-        if("search".equalsIgnoreCase(testToRun)){
+            test.createUploadFolders(Integer.valueOf(concurrencyLevel));
+            for (int i = 0; i < Integer.valueOf(concurrencyLevel); i++) {
+                final int finalI = i;
+                Thread t = new Thread() {
+                    public void run() {
+                        UploadTest test = new UploadTest();
+                        try {
+                            test.uploadTest(TestConfig.UPLOAD_FOLDER+ File.separator+ finalI+"folder", "/shelan");
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        } catch (MahasenClientException e) {
+                            e.printStackTrace();
+                        } catch (URISyntaxException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                };
+                t.start();
+            }
 
         }
-        if("update".equalsIgnoreCase(testToRun)){
+        if ("delete".equalsIgnoreCase(testToRun)) {
 
+            for (int i = 0; i < Integer.valueOf(concurrencyLevel); i++) {
+                final int finalI = i;
+                Thread t = new Thread() {
+                    public void run() {
+                        DeleteTest test = new DeleteTest();
+                        try {
+                            test.deleteTest(TestConfig.UPLOAD_FOLDER + File.separator + finalI + "folder");
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        } catch (MahasenClientException e) {
+                            e.printStackTrace();
+                        } catch (URISyntaxException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                };
+                t.start();
+            }
+
+        }
+        if ("download".equalsIgnoreCase(testToRun)) {
+            for (int i = 0; i < Integer.valueOf(concurrencyLevel); i++) {
+                final int finalI = i;
+                Thread t = new Thread() {
+                    public void run() {
+                        DownloadTest test = new DownloadTest();
+                        try {
+                            test.DownloadTest(TestConfig.UPLOAD_FOLDER + File.separator + finalI + "folder");
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        } catch (MahasenClientException e) {
+                            e.printStackTrace();
+                        } catch (URISyntaxException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                };
+                t.start();
+            }
+        }
+        if ("search".equalsIgnoreCase(testToRun)) {
+            for (int i = 0; i < Integer.valueOf(concurrencyLevel); i++) {
+                final int finalI = i;
+                Thread t = new Thread() {
+                    public void run() {
+                        SearchTest test = new SearchTest();
+                        try {
+                            test.rangeSearch(TestConfig.UPLOAD_FOLDER + File.separator + finalI + "folder");
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                };
+                t.start();
+            }
+
+        }
+        if ("update".equalsIgnoreCase(testToRun)) {
+            for (int i = 0; i < Integer.valueOf(concurrencyLevel); i++) {
+                final int finalI = i;
+                Thread t = new Thread() {
+                    public void run() {
+                        UpdateTest test = new UpdateTest();
+                        try {
+                            test.UpdateTest(TestConfig.UPLOAD_FOLDER+ File.separator+ finalI+"folder");
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                };
+                t.start();
+            }
         }
 
     }
-
 }

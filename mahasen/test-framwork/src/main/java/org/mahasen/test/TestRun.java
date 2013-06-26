@@ -26,6 +26,7 @@ public class TestRun {
 
    ClientLoginData clientLoginData ;
    String[] completeTagArray=null;
+   int concurrencyLevel = 0;
 
    HashMap<String, ArrayList<String>> nameValuePair = new HashMap<String, ArrayList<String>>();
 
@@ -40,7 +41,7 @@ public class TestRun {
        ClientLogin clientLogin = new ClientLogin();
        ClientConfiguration clientConfiguration = ClientConfiguration.getInstance();
 
-            System.setProperty("javax.net.ssl.trustStore", clientConfiguration.getTrustStorePath());
+            System.setProperty("javax.net.ssl.trustStore", TestConfig.SEC_FILE_PATH);
             System.setProperty("javax.net.ssl.trustStorePassword", "wso2carbon");
             System.setProperty("javax.net.ssl.trustStoreType", "JKS");
 
@@ -147,7 +148,7 @@ public class TestRun {
         ArrayList<NameValuePair> nameValuePairsList = new ArrayList<NameValuePair>();
 
         // adding random values to hash map
-        for(int i =0 ; i <100 ; i++){
+        for(int i =0 ; i <2 ; i++){
 
             Random random = new Random();
             int randomNo = random.nextInt(10);
@@ -163,5 +164,6 @@ public class TestRun {
 
 
     }
+
 
 }

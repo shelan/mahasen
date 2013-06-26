@@ -5,6 +5,7 @@ import org.mahasen.exception.MahasenClientException;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.net.URISyntaxException;
 
 /**
@@ -16,14 +17,14 @@ import java.net.URISyntaxException;
  */
 public class UploadTest extends TestRun {
 
-    Upload upload ;
+    Upload upload;
 
-    public UploadTest(){
-           super.initialize();
-     upload = new Upload(super.clientLoginData);
+    public UploadTest() {
+        super.initialize();
+        upload = new Upload(super.clientLoginData);
     }
 
-    public void uploadTest(String uploadingFilesFolder ,String folderStructure)
+    public void uploadTest(String uploadingFilesFolder, String folderStructure)
             throws IOException, MahasenClientException, URISyntaxException {
 
         UploadTest test = new UploadTest();
@@ -36,28 +37,27 @@ public class UploadTest extends TestRun {
 
         for (int i = 0; i < files.length; i++) {
 
-            String tagsToBeApplied=test.createTags(50);
+            String tagsToBeApplied = test.createTags(2);
 
-            System.out.println("Tags to be applied  "+tagsToBeApplied );
+            System.out.println("Tags to be applied  " + tagsToBeApplied);
 
             final long startTime = System.nanoTime();
 
             System.out.println("Uploaling file :" + files[i].getName());
 
-            upload.upload(files[i],tagsToBeApplied,folderStructure,getNameValuePairs());
+            upload.upload(files[i], tagsToBeApplied, folderStructure, getNameValuePairs());
 
             final long finishTime = System.nanoTime();
 
-            long timeConsumed = finishTime-startTime;
-            totalTime = totalTime +timeConsumed ;
+            long timeConsumed = finishTime - startTime;
+            totalTime = totalTime + timeConsumed;
 
-            System.out.println("Time to upload job no :"+i+" in seconds : "+timeConsumed/1000000000.0);
+            System.out.println("Time to upload job no :" + i + " in seconds : " + timeConsumed / 1000000000.0);
 
-            System.out.println("totoal time upto now :" +totalTime/1000000000.0);
+            System.out.println("totoal time upto now :" + totalTime / 1000000000.0);
+        }
+        System.out.println("\nAverage time taken in seconds:" + totalTime / (files.length * 1000000000.0));
     }
-        System.out.println("\nAverage time taken in seconds:" + totalTime/(files.length*1000000000.0));
-    }
-
 
 
     public static void main(String[] args) {
@@ -65,8 +65,7 @@ public class UploadTest extends TestRun {
         UploadTest test = new UploadTest();
 
         try {
-
-            test.uploadTest(TestConfig.UPLOAD_FOLDER ,"/shelan");
+            test.uploadTest(TestConfig.UPLOAD_FOLDER, "/shelan");
 
         } catch (IOException e)
 
@@ -77,6 +76,26 @@ public class UploadTest extends TestRun {
         } catch (URISyntaxException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
+    }
+
+    public void createUploadFolders(int concurrencyNo) {
+
+        for (int i = 0; i < concurrencyNo; i++) {
+
+               File folder = new File (TestConfig.UPLOAD_FOLDER + File.separator + i +"folder");
+               folder.mkdir();
+               folder.canWrite();
+            try {
+                String path = folder.getAbsolutePath() + File.separator + i + "file";
+//(use relative path for Unix systems)
+                File file = new File(path);
+                RandomAccessFile f = new RandomAccessFile(file , "rw");
+                f.setLength(10 * 1024 * 1024);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
     }
 
 }
