@@ -18,11 +18,18 @@
  */
 package org.mahasen;
 
+import org.apache.axis2.AxisFault;
+import org.apache.axis2.context.ConfigurationContext;
+import org.apache.axis2.context.ConfigurationContextFactory;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.wso2.carbon.base.ServerConfiguration;
 import org.wso2.carbon.registry.app.RemoteRegistry;
+import org.wso2.carbon.registry.core.Registry;
 import org.wso2.carbon.registry.core.exceptions.RegistryException;
+import org.wso2.carbon.registry.ws.client.registry.WSRegistryServiceClient;
 
+import java.io.File;
 import java.net.URL;
 
 
@@ -35,7 +42,17 @@ public class RegistryConnectionManager {
 
     private RemoteRegistry remoteRegistry = null;
 
-    private boolean isKeyStoreSet = false;
+    private static boolean isKeyStoreSet = false;
+
+    private static String CARBON_HOME = System.getProperty("carbon.home");
+
+    private static final String axis2Conf = ServerConfiguration.getInstance().getFirstProperty("Axis2Config.clientAxis2XmlLocation");
+
+    private static ConfigurationContext configContext = null;
+
+    private static final String axis2Repo = CARBON_HOME
+            + File.separator +"repository" +
+            File.separator + "deployment" + File.separator + "client";
 
 
     /**
@@ -54,9 +71,9 @@ public class RegistryConnectionManager {
     }
 
 
-    public void setDefaultKeyStore() {
+    public static void setDefaultKeyStore() {
 
-        System.setProperty("javax.net.ssl.trustStore", "CARBON_HOME/resources/security/client-truststore.jks");
+        System.setProperty("javax.net.ssl.trustStore", CARBON_HOME+"/resources/security/client-truststore.jks");
         System.setProperty("javax.net.ssl.trustStorePassword", "wso2carbon");
         System.setProperty("javax.net.ssl.trustStoreType", "JKS");
 
@@ -82,6 +99,20 @@ public class RegistryConnectionManager {
         log.debug("Connected to Remote registry at " + url.toString());
 
         return remoteRegistry;
+    }
+
+    public static Registry getWsRegistry(String url, String username, String password) throws RegistryException {
+        setDefaultKeyStore();
+        System.setProperty("carbon.repo.write.mode", "true");
+
+        try {
+            configContext = ConfigurationContextFactory.createConfigurationContextFromFileSystem(
+                    axis2Repo, axis2Conf);
+        } catch (AxisFault axisFault) {
+            axisFault.printStackTrace();
+        }
+        Registry registry = new WSRegistryServiceClient(url.toString(), username, password, configContext);
+        return registry;
     }
 
     /**

@@ -21,12 +21,10 @@ package org.mahasen.node;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import org.mahasen.configuration.MahasenConfiguration;
-
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
-
+import org.wso2.carbon.registry.core.service.RegistryService;
 import rice.environment.Environment;
 
 import java.net.InetAddress;
@@ -37,9 +35,16 @@ import java.net.InetSocketAddress;
  * node start up
  */
 
+/**
+ * @scr.component name="org.mahasen.node.Activator" immediate="true"
+ * @scr.reference name="registry.service" interface="org.wso2.carbon.registry.core.service.RegistryService"
+ * cardinality="1..1" policy="dynamic" bind="setRegistryService" unbind="unsetRegistryService"
+ */
+
 public class Activator implements BundleActivator {
     private static Log log = LogFactory.getLog(Activator.class);
     MahasenNodeManager nodeManager = MahasenNodeManager.getInstance();
+    private static RegistryService registryService;
 
     /**
      * @param bundleContext
@@ -67,6 +72,23 @@ public class Activator implements BundleActivator {
     public void stop(BundleContext bundleContext) throws Exception {
         nodeManager.cleanUp();
         log.info("cleaned up Mahasen Broker Application");
+    }
+
+    protected void setRegistryService(RegistryService registryService) {
+        Activator.registryService = registryService;
+    }
+
+    protected void unsetRegistryService(RegistryService registryService) {
+        if (registryService != null) {
+            registryService = null;
+        }
+    }
+
+    public static RegistryService getRegistryService() throws Exception {
+        if (registryService == null) {
+          //  throw new Exception("Registry service not available");
+        }
+        return registryService;
     }
 }
 

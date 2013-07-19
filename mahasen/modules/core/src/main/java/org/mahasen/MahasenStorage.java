@@ -20,6 +20,7 @@ package org.mahasen;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.mahasen.node.Activator;
 import org.mahasen.node.MahasenPastContent;
 import org.mahasen.resource.MahasenResource;
 import org.wso2.carbon.registry.core.Registry;
@@ -93,6 +94,15 @@ public class MahasenStorage implements Storage {
         idSet = factory.buildIdSet();
     }
 
+    public MahasenStorage(IdFactory factory, String rootDir, long size, Environment env) throws IOException {
+
+        this.environment = env;
+
+        this.metadata = new ReverseTreeMap();
+
+        idSet = factory.buildIdSet();
+    }
+
     /**
      * Makes the object persistent to disk and stored permanantly
      * <p/>
@@ -115,6 +125,12 @@ public class MahasenStorage implements Storage {
      */
 
     public void store(final Id id, final Serializable metadata, final Serializable obj, Continuation c) {
+
+        try {
+            registry = Activator.getRegistryService().getRegistry("admin","admin");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         environment.getProcessor().processBlockingIO(new WorkRequest(c, environment.getSelectorManager()) {
 
@@ -163,6 +179,12 @@ public class MahasenStorage implements Storage {
      */
     public void unstore(final Id id, Continuation c) {
 
+        try {
+            registry = Activator.getRegistryService().getRegistry("admin","admin");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         //PersistentStorage
         environment.getProcessor().processBlockingIO(new WorkRequest(c, environment.getSelectorManager()) {
 
@@ -196,6 +218,12 @@ public class MahasenStorage implements Storage {
      */
 
     private Resource addResourceProperties(Resource resource, MahasenResource mahasenResource) throws RegistryException {
+
+        try {
+            registry = Activator.getRegistryService().getRegistry("admin","admin");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         for (Map.Entry<String, String> entry : mahasenResource.getProperties().entrySet()) {
 
@@ -288,6 +316,12 @@ public class MahasenStorage implements Storage {
      */
     private void addTags(String registryKey, Vector<String> tags) throws RegistryException {
 
+        try {
+            registry = Activator.getRegistryService().getRegistry("admin","admin");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         log.info("tags to apply " + tags);
 
         for (String tag : tags) {
@@ -311,6 +345,12 @@ public class MahasenStorage implements Storage {
      */
     private MahasenResource extractTags(String registryKey, MahasenResource mahasenResource) throws RegistryException {
 
+        try {
+            registry = Activator.getRegistryService().getRegistry("admin","admin");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         Tag tags[] = registry.getTags(registryKey);
 
         for (Tag tag : tags) {
@@ -329,10 +369,20 @@ public class MahasenStorage implements Storage {
      */
     public boolean exists(Id id) {
 
+        try {
+            if(Activator.getRegistryService() != null){
+            registry = Activator.getRegistryService().getRegistry("admin","admin");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         boolean exists = false;
 
         try {
+            if(registry != null){
             exists = registry.resourceExists(MahasenConstants.ROOT_REGISTRY_PATH + id.hashCode());
+            }
         } catch (RegistryException e) {
             e.printStackTrace();
         }
@@ -355,13 +405,22 @@ public class MahasenStorage implements Storage {
             c.receiveResult(null);
             return;
         }
+
+        try {
+             if(Activator.getRegistryService() != null){
+            registry = Activator.getRegistryService().getRegistry("admin","admin");
+             }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         MahasenPastContent mahasenPastObj = null;
 
         Resource resource = null;
 
         try {
 
-            if (registry.resourceExists(MahasenConstants.ROOT_REGISTRY_PATH + id.hashCode())) {
+            if (registry != null && registry.resourceExists(MahasenConstants.ROOT_REGISTRY_PATH + id.hashCode())) {
 
                 resource = registry.get(MahasenConstants.ROOT_REGISTRY_PATH + id.hashCode());
                 MahasenResource transferResourceOb = new MahasenResource(id);
@@ -432,6 +491,12 @@ public class MahasenStorage implements Storage {
      * @param c     The command to run once the operation is complete
      */
     public void rename(Id oldId, Id newId, Continuation c) {
+
+        try {
+            registry = Activator.getRegistryService().getRegistry("admin","admin");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         if (!idSet.isMemberId(oldId)) {
 
@@ -567,6 +632,12 @@ public class MahasenStorage implements Storage {
      * @param c The command to run once done
      */
     public void flush(Continuation c) {
+
+        try {
+            registry = Activator.getRegistryService().getRegistry("admin","admin");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         try {
 

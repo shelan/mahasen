@@ -341,21 +341,23 @@ public class PutUtil extends AbstractCommonUtil {
         msg.setSendersNodeHandle(mahasenManager.getNode().getLocalHandle());
 
         for (NodeHandle nodeHandle : nodeHandles) {
-            BlockFlag blockFlag = new BlockFlag(true, 1000);
+            BlockFlag blockFlag = new BlockFlag(true, 100);
 
             mahasenPastryApp.sendRequestForIp(nodeHandle, msg);
             while (!mahasenPastryApp.isResultAvailable()) {
                 if (blockFlag.isBlocked()) {
                     mahasenManager.getNode().getEnvironment().getTimeSource().sleep(10);
                 } else {
-                    continue;
+                    break;
                 }
             }
-
+              if(mahasenPastryApp.isResultAvailable()){
             String ip = mahasenPastryApp.getResultIpVector().remove(0).toString();
+                  if (!nodeIps.contains(ip))
+                      nodeIps.add(ip);
+              }
 
-            if (!nodeIps.contains(ip))
-                nodeIps.add(ip);
+
 
         }
 

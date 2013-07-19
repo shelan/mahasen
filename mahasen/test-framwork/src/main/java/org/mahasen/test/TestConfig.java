@@ -34,17 +34,16 @@ public class TestConfig {
 
 
 
-   public static final String HOST = "127.0.0.1";
-   public static final String PORT = "9443";
-   public static final String USER_NAME = "admin";
-   public static final String PASSWORD = "admin";
-   public static final String UPLOAD_FOLDER = "/home/shelan/tmp/client-upload/files";
-   public static final String TAGS_FILE="//home/shelan/tmp/client-upload/tags";
-   public final static String FILE_SIZE = "fileSize(MB)";
-   public final static String UPLOADED_DATE = "uploadedDate";
-   public final static String FILE_NAME = "fileName";
-   public final static String SEC_FILE_PATH = "/home/shelan/mahasen/test/wso2greg-4.5.3/repository/resources/security/client-truststore.jks";
-
+public static final String HOST = "204.13.85.4";
+    public static final String PORT = "9443";
+    public static final String USER_NAME = "admin";
+    public static final String PASSWORD = "admin";
+    public static final String UPLOAD_FOLDER = "/home/mbtest/mahasen/client-upload/files";
+    public static final String TAGS_FILE="/home/mbtest/mahasen/client-upload/tags";
+    public final static String FILE_SIZE = "fileSize(MB)";
+    public final static String UPLOADED_DATE = "uploadedDate";
+    public final static String FILE_NAME = "fileName";
+    public final static String SEC_FILE_PATH = "/home/mbtest/mahasen/test/greg1/repository/resources/security/client-truststore.jks";
 }
 
 

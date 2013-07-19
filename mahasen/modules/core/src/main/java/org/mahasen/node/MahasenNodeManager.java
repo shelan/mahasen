@@ -21,14 +21,10 @@ package org.mahasen.node;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.mahasen.MahasenConstants;
-import org.mahasen.MahasenMemoryStorage;
-import org.mahasen.MahasenPastryApp;
-import org.mahasen.MahasenStorage;
+import org.mahasen.*;
 import org.mahasen.messaging.MahasenMsg;
 import org.mahasen.resource.MahasenResource;
 import org.mahasen.thread.TreeUpdateWorker;
-import org.wso2.carbon.registry.app.RemoteRegistry;
 import org.wso2.carbon.registry.core.Registry;
 import rice.Continuation;
 import rice.environment.Environment;
@@ -138,11 +134,13 @@ public class MahasenNodeManager {
 
         storageFile = new File(storageDirectory);
 
-        registry = new RemoteRegistry(registryUrl, "admin", "admin");
+       // registry = new RemoteRegistry(registryUrl, "admin", "admin");
+
+        //registry = Activator.getRegistryService().getRegistry();
 
         // create the persistent part
         Storage store = new MahasenStorage(new PastryIdFactory(env), storageDirectory, 4 * 1024 * 1024, getNode()
-                .getEnvironment(), registry);
+                .getEnvironment());
 
         mahasenPastApp = new MahasenPastImpl(getNode(), new StorageManagerImpl(idf, store, new LRUCache(
                 new MemoryStorage(idf), 512 * 1024, getNode().getEnvironment())), 3, "PastApp");
@@ -378,7 +376,7 @@ public class MahasenNodeManager {
         mahasenPastApp.lookup(id, false, new Continuation<PastContent, Exception>() {
 
             public void receiveResult(PastContent result) {
-                System.out.println("Successfully looked up Successfully looked up" + result + " for key " + id + ".");
+               // System.out.println("Successfully looked up Successfully looked up" + result + " for key " + id + ".");
 
                 resultContent[0] = result;
                 blockFlag.unblock();

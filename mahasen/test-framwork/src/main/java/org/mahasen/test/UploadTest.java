@@ -90,7 +90,7 @@ public class UploadTest extends TestRun {
 //(use relative path for Unix systems)
                 File file = new File(path);
                 RandomAccessFile f = new RandomAccessFile(file , "rw");
-                f.setLength(10 * 1024 * 1024);
+                f.setLength(500 * 1024 * 1024);
             } catch (Exception e) {
                 e.printStackTrace();
             }
