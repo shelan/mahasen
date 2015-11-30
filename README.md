@@ -55,7 +55,7 @@ download-repository =/home/mahasen/tmp/download/
 ## To run the client
 
 for client
-* navigate to /<sourceroot>/trunk/mahasen/client
+* navigate to /mahasen/client (Cloned source folder)
 
 * execute ```mvn package``` to build the client jar with required dependencies.
 
