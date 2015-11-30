@@ -55,11 +55,12 @@ download-repository =/home/mahasen/tmp/download/
 ## To run the client
 
 for client
-1) navigate to /<sourceroot>/trunk/mahasen/client
+* navigate to /<sourceroot>/trunk/mahasen/client
 
-2) execute mvn package to build the client jar with required dependencies.
+* execute ```mvn package``` to build the client jar with required dependencies.
 
-3) run jar in command line to get the UI.
+* run jar in command line to get the UI.
+
 Give the login details to log.
 Host IP : IP of the node that you are connecting to
 port : registry's port of connecting node (default 9443)
