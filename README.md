@@ -17,7 +17,7 @@ You can build this by running command ``mvn clean install`` at root pom level. B
 https://github.com/shelan/mahasen/blob/master/mahasen/libs/FreePastry-2.1.jar
 https://github.com/shelan/mahasen/blob/master/mahasen/libs/httpclient-4.1.1.jar
 
-5) add following configuration file to  (Change IP address to match your machine's IP address)
+5) add following configuration file to  (Change IP address to match your machine's IP address and folder paths etc.)
 
 GREG_HOME/repository/conf/
 
