@@ -21,7 +21,7 @@ https://github.com/shelan/mahasen/blob/master/mahasen/libs/httpclient-4.1.1.jar
 
 GREG_HOME/repository/conf/
 
-``
+```
 ######################################################
 ##### Mahasen Broker Configuration file  #############
 ######################################################
@@ -50,7 +50,7 @@ truststore-path = wso2greg-3.5.0/resources/security/client-truststore.jks
 ## Download repository
 download-repository =/home/mahasen/tmp/download/
 
-''
+```
 
 ## TO run the client
 
