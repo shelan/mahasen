@@ -52,7 +52,7 @@ download-repository =/home/mahasen/tmp/download/
 
 ```
 
-## TO run the client
+## To run the client
 
 for client
 1) navigate to /<sourceroot>/trunk/mahasen/client
